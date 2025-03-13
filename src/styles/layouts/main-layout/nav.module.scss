@@ -1,0 +1,35 @@
+@use "styles/media" as *;
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 500px;
+
+  &__link {
+    color: var(--color-foreground-alt);
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      width: 100%;
+      background-color: var(--color-accent);
+      transform: scaleX(0) scaleY(0.5);
+      transition: transform var(--transition-duration);
+    }
+
+    @include hover {
+      &:after {
+        transform: scaleX(1);
+      }
+    }
+
+    &_selected {
+      color: var(--color-foreground);
+    }
+  }
+}

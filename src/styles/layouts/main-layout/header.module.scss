@@ -1,0 +1,11 @@
+@use "styles/mixins" as *;
+
+.header {
+  background: var(--color-main-alt);
+  padding: 14px;
+  @include flex-center;
+
+  &_tablet {
+    justify-content: end;
+  }
+}
