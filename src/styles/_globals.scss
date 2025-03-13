@@ -1,8 +1,9 @@
-@use "styles/index/mixins" as *;
+@use "mixins" as *;
 
 body {
   @include fluid-text(18, 16);
 
+  font-family: var(--font-family-base), serif;
   font-weight: 400;
   line-height: 1.28;
   color: var(--color-foreground);

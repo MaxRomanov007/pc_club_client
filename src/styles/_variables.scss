@@ -1,10 +1,10 @@
-@use "styles/index/media" as media;
+@use "media" as media;
 
 :root{
   --color-main: #FFFFFF;
-  --color-main-alt: #FAFAF9;
-  --color-accent: #B9FF66;
-  --color-accent-alt: #8FDF52;
+  --color-main-alt: #EBEBEB;
+  --color-accent: #3084ff;
+  --color-accent-alt: #0664EB;
   --color-foreground: #000000;
   --color-foreground-alt: #5D5D5D;
 
@@ -12,6 +12,8 @@
   --border-radius: 14px;
   --border-radius-small: 7px;
   --border-radius-large: 45px;
+
+  --font-family-base: 'Inter', sans-serif;
 
   --container-width: 1240px;
   --container-padding-x: 20px;
