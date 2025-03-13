@@ -1,0 +1,15 @@
+version: '3.8'
+
+name: pc-club
+services:
+  app:
+    container_name: "pc-club__client"
+    build:
+      context: ..
+      additional_contexts:
+        ssl: C:/Certbot/archive/maxromanov.site
+      dockerfile: deploy/Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: on-failure
