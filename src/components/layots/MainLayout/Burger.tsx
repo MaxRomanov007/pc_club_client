@@ -1,6 +1,7 @@
 import cl from "styles/layouts/main-layout/burger.module.scss";
-import NavigationLink from "components/layots/MainLayout/NavigationLink.tsx";
 import {MouseEventHandler, useState} from "react";
+import classNames from "classnames";
+import NavBar from "components/layots/MainLayout/NavBar.tsx";
 
 const Burger = () => {
     const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -13,11 +14,9 @@ const Burger = () => {
 
     return (
         <>
-            <button className={isVisible ? cl.burger__button + " " + cl.burger__button_open : cl.burger__button} onClick={clickHandler}/>
-            <aside className={isVisible ? cl.burger__menu + " " + cl.burger__menu_visible : cl.burger__menu}>
-                <NavigationLink to='/restraunt'>Ресторан</NavigationLink>
-                <NavigationLink to='/pc'>ПК</NavigationLink>
-                <NavigationLink to='/accaunt'>Аккаунт</NavigationLink>
+            <button className={classNames(cl.burger__button, isVisible && cl.burger__button_open)} onClick={clickHandler}/>
+            <aside className={classNames(cl.burger__menu, isVisible && cl.burger__menu_visible)}>
+                <NavBar className={cl.burger__menu__links}/>
             </aside>
         </>
     );

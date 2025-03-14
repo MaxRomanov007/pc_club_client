@@ -1,14 +1,18 @@
 import cl from "styles/layouts/main-layout/nav.module.scss";
 import NavigationLink from "components/layots/MainLayout/NavigationLink.tsx";
+import {FC} from "react";
+import classNames from "classnames";
 
-const NavBar = () => {
+interface NavBarProps {
+    className?: string;
+}
+
+const NavBar: FC<NavBarProps> = ({className}) => {
     return (
-        <nav className={cl.nav}>
-            <>
-                <NavigationLink to='/restraunt'>Ресторан</NavigationLink>
-                <NavigationLink to='/pc'>ПК</NavigationLink>
-                <NavigationLink to='/accaunt'>Аккаунт</NavigationLink>
-            </>
+        <nav className={classNames(cl.nav, className)}>
+            <NavigationLink to='/restraunt'>Ресторан</NavigationLink>
+            <NavigationLink to='/pc'>ПК</NavigationLink>
+            <NavigationLink to='/accaunt'>Аккаунт</NavigationLink>
         </nav>
     );
 };

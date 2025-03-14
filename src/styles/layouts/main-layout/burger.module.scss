@@ -71,18 +71,24 @@
     top: 0;
     right: 0;
     bottom: 0;
-    width: auto;
-    padding: 68px 20px 20px;
+    width: 60vw;
     display: flex;
+    padding: 88px 0;
     align-items: start;
-    flex-direction: column;
+    justify-content: center;
+    @include fluid-text(32, 20);
     transform: translateX(100%);
-    gap: 20px;
     background-color: var(--color-main-alt);
     transition: all var(--transition-duration);
 
     &_visible {
       transform: translateX(0);
+    }
+
+    &__links {
+      flex-direction: column;
+      gap: 40px;
+      width: auto;
     }
   }
 }
