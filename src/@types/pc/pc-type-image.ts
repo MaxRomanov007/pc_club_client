@@ -1,9 +1,9 @@
-import {IPcType} from "types/pc-type.ts";
+import {IPcType} from "types/pc/pc-type.ts";
 
 export interface IPcTypeImage {
-    id: number;
-    pcTypeId: number;
-    isMain: boolean;
+    pc_type_image_id: number;
+    pc_type_id: number;
+    is_main: boolean;
     path: string;
-    pcType: IPcType;
+    pc_type: IPcType;
 }

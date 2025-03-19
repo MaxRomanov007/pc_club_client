@@ -2,6 +2,8 @@ import AppRouter from "@/router/AppRouter.tsx";
 import {DeviceTypeContext} from "@/context/device-type.ts";
 import {useEffect, useState} from "react";
 import {DeviceTypes} from "types/enums/device-types.tsx";
+import Notificator from "components/ui/Notificator/Notificator.tsx";
+import cl from "styles/App.module.scss";
 
 function App() {
     const [deviceType, setDeviceType] = useState<DeviceTypes>(DeviceTypes.mobileSmall);
@@ -34,7 +36,9 @@ function App() {
     return (
         <>
             <DeviceTypeContext value={deviceType}>
-                <AppRouter/>
+                <Notificator className={cl.App__notificator}>
+                    <AppRouter/>
+                </Notificator>
             </DeviceTypeContext>
         </>
     )

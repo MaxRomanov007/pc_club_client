@@ -1,5 +1,5 @@
-import {IMonitorProducer} from "types/monitor-producer.ts";
-import {IPcType} from "types/pc-type.ts";
+import {IMonitorProducer} from "types/pc/monitor-producer.ts";
+import {IPcType} from "types/pc/pc-type.ts";
 
 export interface IMonitor {
     id: number;

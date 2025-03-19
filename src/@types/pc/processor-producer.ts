@@ -1,4 +1,4 @@
-import {IProcessor} from "types/processor.ts";
+import {IProcessor} from "types/pc/processor.ts";
 
 export interface IProcessorProducer {
     id: number;

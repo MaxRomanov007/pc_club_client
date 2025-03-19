@@ -1,4 +1,4 @@
-import {IPc} from "types/pc.ts";
+import {IPc} from "types/pc/pc.ts";
 
 export interface IPcRoom {
     id: number;

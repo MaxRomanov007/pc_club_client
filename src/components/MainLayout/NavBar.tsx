@@ -1,5 +1,5 @@
 import cl from "styles/layouts/main-layout/nav.module.scss";
-import NavigationLink from "components/layots/MainLayout/NavigationLink.tsx";
+import NavigationLink from "components/MainLayout/NavigationLink.tsx";
 import {FC} from "react";
 import classNames from "classnames";
 

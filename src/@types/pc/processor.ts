@@ -1,5 +1,5 @@
-import {IPcType} from "types/pc-type.ts";
-import {IProcessorProducer} from "types/processor-producer.ts";
+import {IPcType} from "types/pc/pc-type.ts";
+import {IProcessorProducer} from "types/pc/processor-producer.ts";
 
 export interface IProcessor {
     id: number;

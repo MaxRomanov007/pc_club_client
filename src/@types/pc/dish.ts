@@ -1,6 +1,6 @@
-import {IDishStatus} from "types/dish-status.ts";
-import {IDishImage} from "types/dish-image.ts";
-import {IDishOrderList} from "types/dish-order-list.ts";
+import {IDishStatus} from "types/pc/dish-status.ts";
+import {IDishImage} from "types/pc/dish-image.ts";
+import {IDishOrderList} from "types/pc/dish-order-list.ts";
 
 export interface IDish {
     id: number;

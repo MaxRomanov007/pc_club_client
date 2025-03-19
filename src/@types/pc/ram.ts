@@ -1,5 +1,5 @@
-import {IPcType} from "types/pc-type.ts";
-import {IRAMType} from "types/ram-type.ts";
+import {IPcType} from "types/pc/pc-type.ts";
+import {IRAMType} from "types/pc/ram-type.ts";
 
 export interface IRAM {
     id: number;

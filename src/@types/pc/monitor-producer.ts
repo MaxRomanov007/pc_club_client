@@ -1,4 +1,4 @@
-import {IMonitor} from "types/monitor.ts";
+import {IMonitor} from "types/pc/monitor.ts";
 
 export interface IMonitorProducer {
     id: number;

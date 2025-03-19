@@ -1,5 +1,5 @@
-import {IDishOrderStatus} from "types/dish-order-status.ts";
-import {IDishOrderList} from "types/dish-order-list.ts";
+import {IDishOrderStatus} from "types/pc/dish-order-status.ts";
+import {IDishOrderList} from "types/pc/dish-order-list.ts";
 
 export interface IDishOrder {
     id: number;

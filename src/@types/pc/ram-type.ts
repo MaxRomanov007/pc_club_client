@@ -1,4 +1,4 @@
-import {IRAM} from "types/ram.ts";
+import {IRAM} from "types/pc/ram.ts";
 
 export interface IRAMType {
     id: number;

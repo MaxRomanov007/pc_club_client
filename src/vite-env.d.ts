@@ -1,2 +1,2 @@
-declare module '*.scss';
 /// <reference types="vite/client" />
+declare module '*.scss';

@@ -1,4 +1,4 @@
-import {IDishOrder} from "types/dish-order.ts";
+import {IDishOrder} from "types/pc/dish-order.ts";
 
 export interface IDishOrderStatus {
     id: number;

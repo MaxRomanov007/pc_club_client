@@ -1,0 +1,46 @@
+@use "styles/media" as *;
+
+@property --length {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+
+.PcTypeItem {
+  position: relative;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+
+  &::before {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    inset: -3px;
+    border-radius: calc(var(--border-radius) + 3px);
+    background: conic-gradient(var(--color-accent) var(--length), transparent 0);
+    transition: --length calc(var(--transition-duration) * 2);
+  }
+
+  @include hover {
+    &::before {
+      --length: 100%;
+    }
+  }
+
+  &__container {
+    background-color: var(--color-main);
+    border-radius: var(--border-radius);
+    padding: 5px;
+  }
+
+  &__image {
+    border-radius: inherit;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+
+  &__title {
+    margin-block: 5px;
+  }
+}

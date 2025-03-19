@@ -1,8 +1,13 @@
 @use "styles/mixins" as *;
 
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   background: var(--color-main-alt);
   padding: 14px;
+  z-index: 1;
   @include flex-center;
 
   &_tablet {

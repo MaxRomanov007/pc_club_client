@@ -1,5 +1,5 @@
-import {IVideoCardProducer} from "types/video-card-producer.ts";
-import {IPcType} from "types/pc-type.ts";
+import {IVideoCardProducer} from "types/pc/video-card-producer.ts";
+import {IPcType} from "types/pc/pc-type.ts";
 
 export interface IVideoCard {
     id: number;

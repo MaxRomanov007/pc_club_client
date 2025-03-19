@@ -1,0 +1,33 @@
+@use "styles/media" as *;
+
+.Notificator {
+  &__messagesList {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    margin-top: 5px;
+
+    @include mobile-s {
+      transform: none;
+      left: 0;
+      right: 0;
+    }
+  }
+
+  &__message {
+    padding: 5px;
+    max-width: 800px;
+    min-width: 400px;
+    border: var(--border);
+    border-radius: var(--border-radius-small);
+    background-color: var(--color-main);
+    text-align: center;
+
+    @include mobile-s {
+      width: 100%;
+      min-width: 0;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import cl from "styles/layouts/main-layout/burger.module.scss";
 import {MouseEventHandler, useState} from "react";
 import classNames from "classnames";
-import NavBar from "components/layots/MainLayout/NavBar.tsx";
+import NavBar from "components/MainLayout/NavBar.tsx";
 
 const Burger = () => {
     const [isVisible, setIsVisible] = useState<boolean>(false);

@@ -1,5 +1,5 @@
-import {IPc} from "types/pc.ts";
-import {IPcOrderStatus} from "types/pc-order-status.ts";
+import {IPc} from "types/pc/pc.ts";
+import {IPcOrderStatus} from "types/pc/pc-order-status.ts";
 
 export interface IPcOrder {
     id: number;

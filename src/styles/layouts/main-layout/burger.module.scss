@@ -13,7 +13,8 @@
       &::after {
         background-color: var(--color-accent);
         box-shadow: 0 -8px var(--color-accent), 0 8px var(--color-accent);
-      };
+      }
+    ;
     }
 
     &::before {
@@ -56,12 +57,12 @@
       @include hover {
         &::before {
           background-color: var(--color-foreground);
-        };
+        }
 
         &::after {
           background-color: var(--color-foreground);
           box-shadow: 0 0 var(--color-foreground), 0 0 var(--color-foreground);
-        };
+        }
       }
     }
   }
@@ -70,7 +71,7 @@
     position: fixed;
     top: 0;
     right: 0;
-    bottom: 0;
+    bottom: -50%;
     width: 60vw;
     display: flex;
     padding: 88px 0;
