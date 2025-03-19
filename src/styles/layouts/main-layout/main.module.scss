@@ -3,6 +3,7 @@
 
 .main {
   @include flex-center;
+  height: 100vh;
 
   &__container {
     margin-top: var(--header-heigth);
@@ -11,4 +12,9 @@
     margin-inline: auto;
     padding-inline: var(--container-padding-x);
   }
+}
+
+.footer {
+  height: 30vh;
+  background-color: var(--color-main-alt);
 }

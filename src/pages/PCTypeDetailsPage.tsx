@@ -7,7 +7,8 @@ import {useNotification} from "@/hooks/useNotification.ts";
 import Loader from "components/ui/Loader.tsx";
 import ImagesCarousel from "components/ui/ImagesCarousel.tsx";
 import cl from "styles/pages/PCTypeDetailsPage.module.scss"
-import classNames from "classnames";
+import PopupButton from "components/ui/PopupButton.tsx";
+import PageTitle from "components/ui/PageTitle.tsx";
 
 type PcTypeDetailsPageParams = {
     id: string
@@ -53,17 +54,18 @@ const PcTypeDetailsPage = () => {
     }
 
     return (
-        <div>
-            <h1>{pcType?.name}</h1>
-            <section className={classNames(cl.Page__information, cl.Information)}>
+        <section>
+            <PageTitle title={`PC ${pcType?.name || ''}`}/>
+            <h1 className={cl.Page__title}>{pcType?.name}</h1>
+            <section className={cl.Information}>
                 <ImagesCarousel images={images} className={cl.Information__carousel}/>
                 <div>
                     <p>{pcType?.description}</p>
                     <h3>{pcType?.hour_cost}</h3>
-                    <button>Okay</button>
+                    <PopupButton text='Hello'>Okay i pull up</PopupButton>
                 </div>
             </section>
-        </div>
+        </section>
     );
 };
 

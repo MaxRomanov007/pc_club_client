@@ -8,7 +8,7 @@ import {Outlet} from "react-router-dom";
 const MainLayout: FC = () => {
     const deviceType = useContext(DeviceTypeContext);
 
-    const isMobile = useMemo(() => deviceType > DeviceTypes.mobile, [deviceType]);
+    const isMobile = useMemo(() => deviceType <= DeviceTypes.mobile, [deviceType]);
 
     return (
         <>
@@ -18,6 +18,7 @@ const MainLayout: FC = () => {
                     <Outlet/>
                 </div>
             </main>
+            <footer className={cl.footer}></footer>
         </>
     );
 };

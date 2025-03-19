@@ -5,7 +5,7 @@ import classNames from "classnames";
 
 type ElementPlaceFunc<T> = (param: T) => ReactNode;
 
-interface ListProps<T> extends ComponentPropsWithoutRef<'div'> {
+interface ListProps<T> extends ComponentPropsWithoutRef<'section'> {
     collection: T[]
     elementFunc: ElementPlaceFunc<T>
     isLoading?: boolean
@@ -32,11 +32,11 @@ function List<T>(
     }
 
     return (
-        <div className={classNames(cl.List, className)}>
+        <section className={classNames(cl.List, className)}>
             {collection.map((item: T) =>
                 elementFunc(item)
             )}
-        </div>
+        </section>
     );
 }
 

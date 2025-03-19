@@ -1,8 +1,7 @@
-import {FC, MouseEventHandler} from 'react';
+import {FC, MouseEventHandler, ReactEventHandler} from 'react';
 import {IPcType} from "types/pc/pc-type.ts";
 import cl from "styles/components/PcTypeItem.module.scss"
 import {useNavigate} from "react-router-dom";
-import {Image} from "antd";
 import {emptyImage} from "@/constants";
 
 interface PcTypeItemProps {
@@ -12,23 +11,25 @@ interface PcTypeItemProps {
 const PcTypeItem: FC<PcTypeItemProps> = ({pcType}) => {
     const navigate = useNavigate()
 
-    const imageSource = pcType.pc_type_images?.find(i => i.is_main)?.path
+    const imageSource = pcType.pc_type_images?.find(i => i.is_main)?.path || 'undefined'
 
     const openItem: MouseEventHandler<HTMLDivElement> = event => {
         event.preventDefault()
         navigate(`${pcType.pc_type_id}`)
     }
+    const imageFailed: ReactEventHandler<HTMLImageElement> = event => {
+        event.currentTarget.src = emptyImage
+    }
 
     return (
         <div onClick={openItem} className={cl.PcTypeItem}>
             <div className={cl.PcTypeItem__container}>
-                <Image
+                <img
                     src={imageSource}
                     alt={pcType.name}
+                    onError={imageFailed}
                     className={cl.PcTypeItem__image}
-                    fallback={emptyImage}
                     width='100%'
-                    preview={false}
                 />
                 <h3 className={cl.PcTypeItem__title}>{pcType.name}</h3>
                 <p>{pcType.hour_cost} руб./час</p>

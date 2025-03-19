@@ -1,4 +1,5 @@
 @use "styles/mixins" as *;
+@use "styles/media" as *;
 
 .header {
   position: fixed;
@@ -8,9 +9,27 @@
   background: var(--color-main-alt);
   padding: 14px;
   z-index: 1;
-  @include flex-center;
+  display: flex;
+  justify-content: start;
 
-  &_tablet {
+  &_mobile {
     justify-content: end;
+  }
+
+  &__logo {
+    width: auto;
+    z-index: 1;
+
+    @include mobile {
+      width: 100%;
+    }
+  }
+
+  &__navbarContainer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

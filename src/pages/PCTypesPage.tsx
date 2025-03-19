@@ -6,6 +6,7 @@ import List from "components/ui/List.tsx";
 import PcTypeItem from "components/PcTypeItem.tsx";
 import cl from "styles/pages/PCsPage.module.scss"
 import {useNotification} from "@/hooks/useNotification.ts";
+import PageTitle from "components/ui/PageTitle.tsx";
 
 const PCTypesPage: FC = () => {
     const [pcTypes, setPCTypes] = useState<IPcType[]>([]);
@@ -41,6 +42,7 @@ const PCTypesPage: FC = () => {
 
     return (
         <>
+            <PageTitle title={'Our PC'}/>
             <h1 className={cl.PCsPage__title}>Наши ПК</h1>
             <List
                 className={cl.PCsPage__list}
