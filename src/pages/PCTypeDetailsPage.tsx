@@ -9,6 +9,8 @@ import ImagesCarousel from "components/ui/ImagesCarousel.tsx";
 import cl from "styles/pages/PCTypeDetailsPage.module.scss"
 import PopupButton from "components/ui/PopupButton.tsx";
 import PageTitle from "components/ui/PageTitle.tsx";
+import RoomsList from "components/PCTypeDetailsPage/RoomsList.tsx";
+import {IPcRoom} from "types/pc/pc-room.ts";
 
 type PcTypeDetailsPageParams = {
     id: string
@@ -17,27 +19,35 @@ type PcTypeDetailsPageParams = {
 const PcTypeDetailsPage = () => {
     const params = useParams<PcTypeDetailsPageParams>();
     const [pcType, setPcType] = useState<IPcType | null>(null)
-    const [fetching, isLoading, responseStatus] = useFetching(
+    const [rooms, setRooms] = useState<IPcRoom[]>([]);
+    const [selectedPcId, setSelectedPcId] = useState<number>(0);
+    const [fetchPCType, isPcTypeLoading, pcTypeResponseStatus] = useFetching(
         async (id: number) => {
             const pcType = await PcService.getPCType(id)
             setPcType(pcType)
         }
     )
+    const [fetchPcRooms, , roomResponseStatus] = useFetching(
+        async (id: number) => {
+            const rooms = await PcService.getPCRooms(id)
+            setRooms(rooms)
+        }
+    )
     const showNotification = useNotification()
-
     const images = useMemo(() => {
         return pcType?.pc_type_images?.map(i => i.path)
     }, [pcType])
 
     useEffect(() => {
-        fetching(params.id)
+        fetchPCType(params.id)
+        fetchPcRooms(params.id)
     }, [params]);
 
     useEffect(() => {
-        if (responseStatus === 200) {
+        if (pcTypeResponseStatus === 200) {
             return
         }
-        switch (responseStatus) {
+        switch (pcTypeResponseStatus) {
             case 500:
                 showNotification("Ошибка сервера")
                 break
@@ -47,14 +57,35 @@ const PcTypeDetailsPage = () => {
             default:
                 showNotification("Неизвестная ошибка")
         }
-    }, [responseStatus])
+    }, [pcTypeResponseStatus])
 
-    if (isLoading) {
+    useEffect(() => {
+        if (roomResponseStatus === 200) {
+            return
+        }
+        switch (roomResponseStatus) {
+            case 500:
+                showNotification("Ошибка сервера")
+                break
+            case 404:
+                showNotification("Комнаты ПК не найден")
+                break
+            default:
+                showNotification("Неизвестная ошибка")
+        }
+    }, [roomResponseStatus])
+
+    const onPcSelectionChanged = (id?: number) => {
+        setSelectedPcId(id ?? 0)
+        console.log(id)
+    }
+
+    if (isPcTypeLoading) {
         return <Loader/>
     }
 
     return (
-        <section>
+        <div>
             <PageTitle title={`PC ${pcType?.name || ''}`}/>
             <h1 className={cl.Page__title}>{pcType?.name}</h1>
             <section className={cl.Information}>
@@ -62,10 +93,18 @@ const PcTypeDetailsPage = () => {
                 <div>
                     <p>{pcType?.description}</p>
                     <h3>{pcType?.hour_cost}</h3>
-                    <PopupButton text='Hello'>Okay i pull up</PopupButton>
+                    <PopupButton text='Hello'>
+                        <RoomsList
+                            rooms={rooms}
+                            selectedId={selectedPcId}
+                            onPcSelected={onPcSelectionChanged }
+                        />
+
+
+                    </PopupButton>
                 </div>
             </section>
-        </section>
+        </div>
     );
 };
 

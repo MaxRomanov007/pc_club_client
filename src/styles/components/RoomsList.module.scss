@@ -1,0 +1,100 @@
+@use "styles/media" as *;
+
+.PcItem {
+  width: 25px;
+  aspect-ratio: 1;
+  border-radius: var(--border-radius-small);
+  border: var(--color-main) 3px solid;
+  transition: all var(--transition-duration);
+
+  &_available {
+    border: 3px solid var(--color-accent);
+
+    @include hover {
+      background-color: var(--color-main);
+      border: 3px solid var(--color-accent-alt);
+    }
+  }
+
+  &_checked {
+    border: 3px solid var(--color-accent-alt);
+    background-color: var(--color-accent);
+
+    @include hover {
+      background-color: var(--color-accent-alt);
+      border: 3px solid var(--color-accent);
+    }
+  }
+}
+
+.RoomsList {
+  display: flex;
+  align-items: center;
+
+  &__arrow {
+    position: relative;
+    width: 50px;
+    aspect-ratio: 1;
+    background-color: transparent;
+    border: none;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 50%;
+      aspect-ratio: 1;
+      border-left: 3px solid var(--color-foreground);
+      border-bottom: 3px solid var(--color-foreground);
+      top: 50%;
+      left: 50%;
+      transform: translate(-25%, -50%);
+      transition: all var(--transition-duration);
+    }
+
+    &:disabled::before {
+      border-color: var(--color-foreground-alt);
+    }
+
+    &_left::before {
+      transform: translate(-25%, -50%) rotate(45deg);
+    }
+
+    &_right::before {
+      transform: translate(-75%, -50%) rotate(-135deg);
+    }
+
+    @include hover {
+      &:before {
+        border-color: var(--color-foreground-alt);
+      }
+    }
+  }
+}
+
+.Room {
+  transition: all var(--transition-duration);
+
+  &__title {
+    width: 300px;
+    margin-block: 5px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__keyboard {
+    width: 300px;
+    height: 200px;
+    overflow: scroll;
+    scrollbar-color: var(--color-accent) transparent;
+    scrollbar-width: thin;
+  }
+}
+
+.RoomsCarousel {
+  overflow: hidden;
+  width: 300px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+}

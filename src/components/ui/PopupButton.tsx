@@ -1,5 +1,5 @@
 import cl from 'styles/ui/PopupButton.module.scss'
-import {FC, MouseEventHandler, PropsWithChildren, useState} from "react";
+import {FC, MouseEventHandler, PropsWithChildren, useRef, useState} from "react";
 import classNames from "classnames";
 import Button from "components/ui/Button.tsx";
 
@@ -20,19 +20,34 @@ const PopupButton: FC<PopupButtonProps> = (
     }
 ) => {
     const [isVisible, setIsVisible] = useState<boolean>(visible || false)
+    const buttonRef = useRef<HTMLButtonElement>(null)
+    const popupRef = useRef<HTMLDivElement>(null)
 
     const changeVisibility: MouseEventHandler<HTMLButtonElement> = event => {
         event.preventDefault()
 
         onVisibilityChange?.(!isVisible)
+        if (isVisible) {
+            buttonRef?.current?.classList.remove(cl.PopupButton__button_visible)
 
-        setIsVisible(!isVisible)
+            popupRef?.current?.classList.add(cl.PopupButton__popup_exit)
+
+            setTimeout(() => {
+                popupRef?.current?.classList.remove(cl.PopupButton__popup_exit)
+                setIsVisible(false)
+            }, 200)
+        } else {
+            buttonRef?.current?.classList.add(cl.PopupButton__button_visible)
+            setIsVisible(true)
+        }
+
     }
 
     return (
         <div className={classNames(cl.PopupButton, className)}>
             <Button
-                className={classNames(isVisible && cl.PopupButton_visible)}
+                className={cl.PopupButton__button}
+                ref={buttonRef}
                 onClick={changeVisibility}
             >
                 {text}
@@ -41,7 +56,7 @@ const PopupButton: FC<PopupButtonProps> = (
             {!isVisible ?
                 <></>
                 :
-                <div className={cl.PopupButton__popup}>
+                <div className={cl.PopupButton__popup} ref={popupRef}>
                     {children}
                 </div>
             }

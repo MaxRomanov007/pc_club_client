@@ -11,7 +11,7 @@ import PageTitle from "components/ui/PageTitle.tsx";
 const PCTypesPage: FC = () => {
     const [pcTypes, setPCTypes] = useState<IPcType[]>([]);
     const [limit] = useState<number>(10);
-    const [offset] = useState<number>(5);
+    const [offset] = useState<number>(0);
     const showNotification = useNotification();
     const [fetchPcTypes, isPcTypesLoading, pcTypesStatus] = useFetching(
         async (limit: number, offset: number) => {

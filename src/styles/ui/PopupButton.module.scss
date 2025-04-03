@@ -1,19 +1,31 @@
 .PopupButton {
   position: relative;
 
-  &_visible {
+  &__button {
+
     &::after {
       content: '';
 
       position: absolute;
       bottom: 0;
       left: 50%;
-      transform: translate(-50%, calc(100% + 10px)) rotate(45deg);
+      transform: translate(-50%, 21px);
 
-      width: 16px;
-      aspect-ratio: 1;
+      width: 0;
+      height: 0;
+      border-left: 16px solid transparent;
+      border-right: 16px solid transparent;
 
-      background-color: var(--color-main-alt);
+      border-bottom: 16px solid var(--color-main-alt);
+
+      opacity: 0;
+      transition: opacity var(--transition-duration);
+    }
+
+    &_visible {
+      &::after {
+        opacity: 1;
+      }
     }
   }
 
@@ -21,7 +33,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    transform: translateY(calc(100% + 18px));
+    transform: translateY(calc(100% + 20px));
 
     background-color: var(--color-main-alt);
     border-radius: var(--border-radius);
@@ -30,5 +42,31 @@
     min-width: 100%;
     width: auto;
     text-wrap: nowrap;
+    transform-origin: 0;
+
+    animation: scaleAnimation var(--transition-duration) linear;
+    transition: opacity var(--transition-duration);
+
+    &_exit {
+      opacity: 0;
+    }
+  }
+}
+
+@keyframes opacityAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes unscaleAnimation {
+  from {
+    scale: 1;
+  }
+  to {
+    scale: 0;
   }
 }

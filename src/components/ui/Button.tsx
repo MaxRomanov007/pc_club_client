@@ -1,8 +1,8 @@
 import cl from "styles/ui/Button.module.scss";
 import classNames from "classnames";
-import {ComponentPropsWithoutRef, FC} from "react";
+import {ComponentPropsWithRef, FC} from "react";
 
-const Button: FC<ComponentPropsWithoutRef<'button'>> = (
+const Button: FC<ComponentPropsWithRef<'button'>> = (
     {
         className,
         children,
