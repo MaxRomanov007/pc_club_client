@@ -1,0 +1,77 @@
+@use "styles/media" as *;
+
+.Modal {
+
+  &_opened {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 50%);
+    z-index: 1;
+  }
+
+  &__content {
+    position: absolute;
+    background-color: var(--color-main-alt);
+    border-radius: var(--border-radius);
+    padding: 20px;
+
+    min-width: 200px;
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+  }
+}
+
+.Controls {
+  &__close {
+    position: relative;
+    width: 30px;
+    aspect-ratio: 1;
+
+    &::before, &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      aspect-ratio: 1;
+      border-top: var(--border);
+      transition: all var(--transition-duration);
+    }
+
+    &::before {
+      border-left: var(--border);
+      transform-origin: left top;
+      transform: rotate(-45deg);
+    }
+
+    &::after {
+      border-right: var(--border);
+      transform-origin: right top;
+      transform: translateX(-85%) rotate(45deg);
+    }
+
+    @include hover {
+      &::before {
+        border-left: var(--border-alt);
+        border-top: var(--border-alt);
+      }
+
+      &::after {
+        border-right: var(--border-alt);
+        border-top: var(--border-alt);
+      }
+    }
+  }
+}

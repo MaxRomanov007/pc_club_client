@@ -1,7 +1,9 @@
 import {IPcRoom} from "types/pc/pc-room.ts";
-import {FC, useEffect, useRef} from "react";
+import {FC, useContext, useEffect, useRef} from "react";
 import cl from "styles/components/RoomsList.module.scss";
 import RoomKeyboard from "components/PCTypeDetailsPage/RoomKeyboard.tsx";
+import {DeviceTypeContext} from "@/context/device-type.ts";
+import {DeviceTypes} from "types/enums/device-types.tsx";
 
 interface RoomsCarouselProps {
     rooms: IPcRoom[]
@@ -12,10 +14,12 @@ interface RoomsCarouselProps {
 
 const RoomsCarousel:FC<RoomsCarouselProps> = ({rooms, current, selectedId, onPcSelected}) => {
     const carouselRef = useRef<HTMLDivElement>(null);
+    const device = useContext(DeviceTypeContext)
 
     useEffect(() => {
+        const scrollLength = device <= DeviceTypes.mobile ? 200 : 300
         if (current !== undefined) {
-            carouselRef.current?.scroll({left: 300 * current, behavior: "smooth"})
+            carouselRef.current?.scroll({left: scrollLength * current, behavior: "smooth"})
         }
     }, [current]);
 

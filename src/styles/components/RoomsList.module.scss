@@ -80,6 +80,10 @@
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    @include mobile {
+      width: 200px;
+    }
   }
 
   &__keyboard {
@@ -88,13 +92,22 @@
     overflow: scroll;
     scrollbar-color: var(--color-accent) transparent;
     scrollbar-width: thin;
+
+    @include mobile {
+      width: 200px;
+    }
   }
 }
 
 .RoomsCarousel {
   overflow: hidden;
   width: 300px;
+
   height: auto;
   display: flex;
   flex-direction: row;
+
+  @include mobile {
+    width: 200px;
+  }
 }

@@ -97,10 +97,8 @@ const PcTypeDetailsPage = () => {
                         <RoomsList
                             rooms={rooms}
                             selectedId={selectedPcId}
-                            onPcSelected={onPcSelectionChanged }
+                            onPcSelected={onPcSelectionChanged}
                         />
-
-
                     </PopupButton>
                 </div>
             </section>

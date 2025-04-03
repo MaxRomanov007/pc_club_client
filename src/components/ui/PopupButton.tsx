@@ -1,7 +1,10 @@
 import cl from 'styles/ui/PopupButton.module.scss'
-import {FC, MouseEventHandler, PropsWithChildren, useRef, useState} from "react";
+import {FC, MouseEventHandler, PropsWithChildren, useContext, useRef, useState} from "react";
 import classNames from "classnames";
 import Button from "components/ui/Button.tsx";
+import {DeviceTypeContext} from "@/context/device-type.ts";
+import {DeviceTypes} from "types/enums/device-types.tsx";
+import Modal from "components/ui/Modal.tsx";
 
 interface PopupButtonProps extends PropsWithChildren {
     text?: string
@@ -22,10 +25,14 @@ const PopupButton: FC<PopupButtonProps> = (
     const [isVisible, setIsVisible] = useState<boolean>(visible || false)
     const buttonRef = useRef<HTMLButtonElement>(null)
     const popupRef = useRef<HTMLDivElement>(null)
+    const device = useContext(DeviceTypeContext)
 
-    const changeVisibility: MouseEventHandler<HTMLButtonElement> = event => {
+    const onMainButtonClick: MouseEventHandler<HTMLButtonElement> = event => {
         event.preventDefault()
+        changeVisibility()
+    }
 
+    const changeVisibility = () => {
         onVisibilityChange?.(!isVisible)
         if (isVisible) {
             buttonRef?.current?.classList.remove(cl.PopupButton__button_visible)
@@ -37,10 +44,11 @@ const PopupButton: FC<PopupButtonProps> = (
                 setIsVisible(false)
             }, 200)
         } else {
-            buttonRef?.current?.classList.add(cl.PopupButton__button_visible)
+            if (device >= DeviceTypes.tablet) {
+                buttonRef?.current?.classList.add(cl.PopupButton__button_visible)
+            }
             setIsVisible(true)
         }
-
     }
 
     return (
@@ -48,7 +56,7 @@ const PopupButton: FC<PopupButtonProps> = (
             <Button
                 className={cl.PopupButton__button}
                 ref={buttonRef}
-                onClick={changeVisibility}
+                onClick={onMainButtonClick}
             >
                 {text}
             </Button>
@@ -56,9 +64,14 @@ const PopupButton: FC<PopupButtonProps> = (
             {!isVisible ?
                 <></>
                 :
-                <div className={cl.PopupButton__popup} ref={popupRef}>
-                    {children}
-                </div>
+                device < DeviceTypes.tablet ?
+                    <Modal opened onClose={changeVisibility}>
+                        {children}
+                    </Modal>
+                    :
+                    <div className={cl.PopupButton__popup} ref={popupRef}>
+                        {children}
+                    </div>
             }
         </div>
     );
