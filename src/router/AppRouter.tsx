@@ -12,6 +12,7 @@ const AppRouter = () => {
                     <Route path='/pc' element={<PCTypesPage/>}/>
                     <Route path='/pc/:id' element={<PCTypeDetailsPage/>}/>
                     <Route path='/accaunt'/>
+                    <Route path='/login' element={<></>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

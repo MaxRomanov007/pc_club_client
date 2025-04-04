@@ -3,7 +3,7 @@ import {FC, MouseEventHandler, PropsWithChildren, useContext, useRef, useState} 
 import classNames from "classnames";
 import Button from "components/ui/Button.tsx";
 import {DeviceTypeContext} from "@/context/device-type.ts";
-import {DeviceTypes} from "types/enums/device-types.tsx";
+import {DeviceTypes} from "types/enums/device-types.ts";
 import Modal from "components/ui/Modal.tsx";
 
 interface PopupButtonProps extends PropsWithChildren {

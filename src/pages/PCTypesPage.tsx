@@ -1,7 +1,7 @@
 import {FC, useEffect, useState} from "react";
 import {IPcType} from "types/pc/pc-type.ts";
 import {useFetching} from "@/hooks/useFetching.ts";
-import PcService from "@/service/PcService.ts";
+import PcService from "@/api/services/PcService.ts";
 import List from "components/ui/List.tsx";
 import PcTypeItem from "components/PcTypeItem.tsx";
 import cl from "styles/pages/PCsPage.module.scss"

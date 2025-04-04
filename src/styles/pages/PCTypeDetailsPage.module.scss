@@ -11,6 +11,10 @@
   flex-direction: row;
   gap: 10px;
 
+  @include mobile-s {
+    flex-direction: column;
+  }
+
   &__carousel {
     width: 40%;
 
@@ -28,7 +32,23 @@
     flex-direction: column;
   }
 
-  @include mobile-s {
+  &__order {
+    display: flex;
     flex-direction: column;
+    gap: 10px;
+  }
+}
+
+.Order {
+  &__keyboard {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-between;
+    padding: 10px;
+
+    @include mobile-s {
+      flex-direction: column;
+    }
   }
 }

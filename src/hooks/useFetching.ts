@@ -1,5 +1,7 @@
 import {useState} from "react";
 import AxiosStatic from "axios";
+import {useNavigate} from "react-router-dom";
+import {useNotification} from "@/hooks/useNotification.ts";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type anyFunction = (...args : any[]) => any;
@@ -11,8 +13,11 @@ type useFetchingFunc = (callback: anyFunction) => useFetchingResult;
 export const useFetching: useFetchingFunc = (callback) => {
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [status, setStatus] = useState<number>(200)
+    const navigate = useNavigate();
+    const showNotification = useNotification()
 
     const fetching: anyFunction = async (...args) => {
+
         try {
             setIsLoading(true)
             await callback(...args)
@@ -23,6 +28,13 @@ export const useFetching: useFetchingFunc = (callback) => {
             }
             if (!e.response) {
                 setStatus(0)
+                return
+            }
+
+            if (e.status === 401) {
+                navigate("/login")
+                showNotification("Необходимо авторизоваться")
+                setStatus(401)
                 return
             }
 

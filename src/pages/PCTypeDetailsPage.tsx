@@ -2,15 +2,13 @@ import {useParams} from "react-router-dom";
 import {useEffect, useMemo, useState} from "react";
 import {IPcType} from "types/pc/pc-type.ts";
 import {useFetching} from "@/hooks/useFetching.ts";
-import PcService from "@/service/PcService.ts";
+import PcService from "@/api/services/PcService.ts";
 import {useNotification} from "@/hooks/useNotification.ts";
 import Loader from "components/ui/Loader.tsx";
 import ImagesCarousel from "components/ui/ImagesCarousel.tsx";
 import cl from "styles/pages/PCTypeDetailsPage.module.scss"
-import PopupButton from "components/ui/PopupButton.tsx";
 import PageTitle from "components/ui/PageTitle.tsx";
-import RoomsList from "components/PCTypeDetailsPage/RoomsList.tsx";
-import {IPcRoom} from "types/pc/pc-room.ts";
+import OrderPcButton from "components/PCTypeDetailsPage/OrderPcButton.tsx";
 
 type PcTypeDetailsPageParams = {
     id: string
@@ -19,18 +17,10 @@ type PcTypeDetailsPageParams = {
 const PcTypeDetailsPage = () => {
     const params = useParams<PcTypeDetailsPageParams>();
     const [pcType, setPcType] = useState<IPcType | null>(null)
-    const [rooms, setRooms] = useState<IPcRoom[]>([]);
-    const [selectedPcId, setSelectedPcId] = useState<number>(0);
     const [fetchPCType, isPcTypeLoading, pcTypeResponseStatus] = useFetching(
         async (id: number) => {
             const pcType = await PcService.getPCType(id)
             setPcType(pcType)
-        }
-    )
-    const [fetchPcRooms, , roomResponseStatus] = useFetching(
-        async (id: number) => {
-            const rooms = await PcService.getPCRooms(id)
-            setRooms(rooms)
         }
     )
     const showNotification = useNotification()
@@ -40,7 +30,6 @@ const PcTypeDetailsPage = () => {
 
     useEffect(() => {
         fetchPCType(params.id)
-        fetchPcRooms(params.id)
     }, [params]);
 
     useEffect(() => {
@@ -59,27 +48,6 @@ const PcTypeDetailsPage = () => {
         }
     }, [pcTypeResponseStatus])
 
-    useEffect(() => {
-        if (roomResponseStatus === 200) {
-            return
-        }
-        switch (roomResponseStatus) {
-            case 500:
-                showNotification("Ошибка сервера")
-                break
-            case 404:
-                showNotification("Комнаты ПК не найден")
-                break
-            default:
-                showNotification("Неизвестная ошибка")
-        }
-    }, [roomResponseStatus])
-
-    const onPcSelectionChanged = (id?: number) => {
-        setSelectedPcId(id ?? 0)
-        console.log(id)
-    }
-
     if (isPcTypeLoading) {
         return <Loader/>
     }
@@ -93,13 +61,7 @@ const PcTypeDetailsPage = () => {
                 <div>
                     <p>{pcType?.description}</p>
                     <h3>{pcType?.hour_cost}</h3>
-                    <PopupButton text='Hello'>
-                        <RoomsList
-                            rooms={rooms}
-                            selectedId={selectedPcId}
-                            onPcSelected={onPcSelectionChanged}
-                        />
-                    </PopupButton>
+                    <OrderPcButton id={Number(params.id) ?? 0}/>
                 </div>
             </section>
         </div>

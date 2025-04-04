@@ -1,7 +1,7 @@
 import AppRouter from "@/router/AppRouter.tsx";
 import {DeviceTypeContext} from "@/context/device-type.ts";
 import {useEffect, useState} from "react";
-import {DeviceTypes} from "types/enums/device-types.tsx";
+import {DeviceTypes} from "types/enums/device-types.ts";
 import Notificator from "components/ui/Notificator/Notificator.tsx";
 import cl from "styles/App.module.scss";
 

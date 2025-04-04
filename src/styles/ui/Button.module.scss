@@ -31,4 +31,9 @@
       --length: 100%;
     }
   }
+
+  &_outlined {
+    background-color: var(--color-foreground);
+    color: var(--color-main);
+  }
 }

@@ -4,7 +4,7 @@ import {CarouselRef} from "antd/lib/carousel";
 import cl from "styles/ui/ImagesCarousel.module.scss"
 import {emptyImage} from "@/constants";
 import classNames from "classnames";
-import {DeviceTypes} from "types/enums/device-types.tsx";
+import {DeviceTypes} from "types/enums/device-types.ts";
 import {DeviceTypeContext} from "@/context/device-type.ts";
 
 type ChangeCarouselSliceEventHandler = (current: number, prevCurrent: number) => void

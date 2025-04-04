@@ -3,7 +3,7 @@ import {FC, useContext, useEffect, useRef} from "react";
 import cl from "styles/components/RoomsList.module.scss";
 import RoomKeyboard from "components/PCTypeDetailsPage/RoomKeyboard.tsx";
 import {DeviceTypeContext} from "@/context/device-type.ts";
-import {DeviceTypes} from "types/enums/device-types.tsx";
+import {DeviceTypes} from "types/enums/device-types.ts";
 
 interface RoomsCarouselProps {
     rooms: IPcRoom[]
