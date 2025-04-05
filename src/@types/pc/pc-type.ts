@@ -1,4 +1,4 @@
-import {IPcTypeImage} from "types/pc/pc-type-image.ts";
+import {IImage} from "types/pc/image.ts";
 import {IPc} from "types/pc/pc.ts";
 import {IRAM} from "types/pc/ram.ts";
 import {IMonitor} from "types/pc/monitor.ts";
@@ -19,5 +19,5 @@ export interface IPcType {
     monitor: IMonitor;
     ram: IRAM;
     pcs: IPc[];
-    pc_type_images: IPcTypeImage[];
+    pc_type_images: IImage[];
 }

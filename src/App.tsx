@@ -6,6 +6,7 @@ import Notificator from "components/ui/Notificator/Notificator.tsx";
 import cl from "styles/App.module.scss";
 import {IsAuthorizedContext} from "@/context/isAuthorized.ts";
 import {ConfigProvider, theme} from "antd";
+import {accessTokenKey} from "@/constants";
 
 function App() {
     const [deviceType, setDeviceType] = useState<DeviceTypes>(DeviceTypes.mobileSmall);
@@ -45,6 +46,10 @@ function App() {
         return () => {
             window.removeEventListener('resize', handleResize);
         };
+    }, []);
+
+    useEffect(() => {
+        setIsAuth(!!localStorage.getItem(accessTokenKey))
     }, []);
 
     return (
