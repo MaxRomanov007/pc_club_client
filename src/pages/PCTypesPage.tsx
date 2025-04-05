@@ -42,7 +42,7 @@ const PCTypesPage: FC = () => {
 
     return (
         <>
-            <PageTitle title={'Our PC'}/>
+            <PageTitle title='Наши ПК'/>
             <h1 className={cl.PCsPage__title}>Наши ПК</h1>
             <List
                 className={cl.PCsPage__list}

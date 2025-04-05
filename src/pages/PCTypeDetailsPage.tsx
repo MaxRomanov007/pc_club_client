@@ -54,7 +54,7 @@ const PcTypeDetailsPage = () => {
 
     return (
         <div>
-            <PageTitle title={`PC ${pcType?.name || ''}`}/>
+            <PageTitle title={`ПК ${pcType?.name || ''}`}/>
             <h1 className={cl.Page__title}>{pcType?.name}</h1>
             <section className={cl.Information}>
                 <ImagesCarousel images={images} className={cl.Information__carousel}/>

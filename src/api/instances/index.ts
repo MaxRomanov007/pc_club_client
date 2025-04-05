@@ -5,10 +5,12 @@ const address = import.meta.env.VITE_API_ADDRESS;
 
 export const api = axios.create({
     baseURL: address,
+    withCredentials: true,
 })
 
 export const apiWithAuth = axios.create({
     baseURL: address,
+    withCredentials: true
 })
 
-LoadWithAuthInterceptor()
+LoadWithAuthInterceptor();

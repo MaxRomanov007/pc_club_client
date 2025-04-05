@@ -1,0 +1,21 @@
+.Input {
+  background: var(--color-main-alt);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  padding-block: 10px;
+  padding-inline: 20px;
+  color: var(--color-foreground);
+  transition: border var(--transition-duration);
+
+  &:invalid {
+    border: var(--border-error)
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &_invalid {
+    border: var(--border-error)
+  }
+}

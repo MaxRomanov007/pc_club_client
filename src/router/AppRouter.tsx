@@ -2,8 +2,10 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import MainLayout from "@/layouts/MainLayout.tsx";
 import PCTypesPage from "pages/PCTypesPage.tsx";
 import PCTypeDetailsPage from "pages/PCTypeDetailsPage.tsx";
+import LoginPage from "pages/LoginPage.tsx";
 
 const AppRouter = () => {
+
     return (
         <BrowserRouter>
             <Routes>
@@ -11,8 +13,8 @@ const AppRouter = () => {
                     <Route path='/restraunt'/>
                     <Route path='/pc' element={<PCTypesPage/>}/>
                     <Route path='/pc/:id' element={<PCTypeDetailsPage/>}/>
-                    <Route path='/accaunt'/>
-                    <Route path='/login' element={<></>}/>
+                    <Route path='/profile'/>
+                    <Route path='/login' element={<LoginPage/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

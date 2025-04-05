@@ -24,7 +24,7 @@ const Header: FC<HeaderProps> = ({isMobile}) => {
                 to='/pc'
                 className={cl.header__logo}
             >
-            PC Club
+                PC Club
             </Link>
 
             {!isMobile ?

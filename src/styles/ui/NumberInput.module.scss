@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  column-gap: 10px;
+  column-gap: var(--spacing);
   justify-content: space-between;
 
   &__minus, &__plus {

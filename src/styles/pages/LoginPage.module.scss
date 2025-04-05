@@ -1,0 +1,37 @@
+@use "styles/media" as *;
+
+.LoginPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--spacing);
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: var(--spacing);
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.Links {
+  &__link {
+    text-decoration: underline;
+
+    @include hover {
+      color: var(--color-accent);
+    }
+  }
+}

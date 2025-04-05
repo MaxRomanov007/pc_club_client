@@ -9,7 +9,7 @@
 .Information {
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: var(--spacing);
 
   @include mobile-s {
     flex-direction: column;
@@ -35,7 +35,7 @@
   &__order {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: var(--spacing);
   }
 }
 
