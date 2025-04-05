@@ -3,6 +3,7 @@ import MainLayout from "@/layouts/MainLayout.tsx";
 import PCTypesPage from "pages/PCTypesPage.tsx";
 import PCTypeDetailsPage from "pages/PCTypeDetailsPage.tsx";
 import LoginPage from "pages/LoginPage.tsx";
+import RegistrationPage from "pages/RegistrationPage.tsx";
 
 const AppRouter = () => {
 
@@ -15,6 +16,7 @@ const AppRouter = () => {
                     <Route path='/pc/:id' element={<PCTypeDetailsPage/>}/>
                     <Route path='/profile'/>
                     <Route path='/login' element={<LoginPage/>}/>
+                    <Route path='/registration' element={<RegistrationPage/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

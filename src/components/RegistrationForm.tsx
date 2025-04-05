@@ -1,58 +1,60 @@
-import cl from "styles/pages/LoginPage.module.scss";
-import Input from "components/ui/Input.tsx";
-import Button from "components/ui/Button.tsx";
 import {useNotification} from "@/hooks/useNotification.ts";
 import {useFetching} from "@/hooks/useFetching.ts";
 import UserService from "@/api/services/UserService.ts";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {loginSchema} from "@/validations/login.ts";
-import {Tooltip} from "antd";
 import {useNavigate} from "react-router-dom";
-import {useContext} from "react";
+import {registrationSchema} from "@/validations/registration.ts";
+import {Tooltip} from "antd";
+import Input from "components/ui/Input.tsx";
+import Button from "components/ui/Button.tsx";
+import cl from "styles/pages/RegistrationPage.module.scss"
+import {useContext, useEffect} from "react";
 import {IsAuthorizedContext} from "@/context/isAuthorized.ts";
 
 type Credentials = {
     email: string
     password: string
+    repeatPassword: string
 }
 
-const LoginForm = () => {
+const RegistrationForm = () => {
     const showNotification = useNotification();
-    const [login] = useFetching(
+    const [registration] = useFetching(
         async (email: string, password: string) => {
-            await UserService.login(email, password)
+            await UserService.register(email, password)
         }
     )
     const {register, handleSubmit, formState: {errors}} = useForm({
-        resolver: yupResolver(loginSchema),
+        resolver: yupResolver(registrationSchema),
         mode: "onBlur"
     });
     const navigate = useNavigate()
     const [, setIsAuth] = useContext(IsAuthorizedContext)
 
-    const onLoginSubmit: SubmitHandler<Credentials> = async (cred, e) => {
+    const onRegistrationSubmit: SubmitHandler<Credentials> = async (cred, e) => {
         e?.preventDefault()
 
-        const status = await login(cred.email, cred.password)
+        const status = await registration(cred.email, cred.password)
         switch (status) {
             case 200:
-                showNotification("Вы успешно авторизовались")
+                showNotification("Вы успешно зарегистрировались")
                 setIsAuth(true)
                 navigate("/profile")
                 break
-            case 401:
-                showNotification("Неверные логин или пароль")
-                break
             default:
-                showNotification("Не удалось осуществить вход")
+                showNotification("Не удалось осуществить зарегистрироваться")
         }
     }
 
+    useEffect(() => {
+        console.log(errors)
+    }, [errors]);
+
     return (
         <form
-            className={cl.LoginPage__form}
-            onSubmit={handleSubmit(onLoginSubmit)}
+            className={cl.RegistrationPage__form}
+            onSubmit={handleSubmit(onRegistrationSubmit)}
             noValidate
         >
 
@@ -83,9 +85,23 @@ const LoginForm = () => {
                 />
             </Tooltip>
 
-            <Button>Войти</Button>
+            <label htmlFor="repeatPassword">Повторите пароль</label>
+            <Tooltip placement="topRight" title={errors.repeatPassword?.message}>
+                <Input
+                    id="repeatPassword"
+                    placeholder='Повторите пароль'
+                    type='password'
+                    minLength={8}
+                    maxLength={100}
+                    {...register('repeatPassword')}
+                    invalid={!!errors.repeatPassword}
+                    aria-invalid={!!errors.repeatPassword}
+                />
+            </Tooltip>
+
+            <Button>Зарегистрироваться</Button>
         </form>
     );
 };
 
-export default LoginForm;
+export default RegistrationForm;

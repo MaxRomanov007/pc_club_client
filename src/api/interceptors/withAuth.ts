@@ -14,7 +14,7 @@ type ExtendedAxiosRequestConfig = InternalAxiosRequestConfig & {
 };
 
 type RefreshTokenResponse = {
-    accessToken: string;
+    access_token: string;
 };
 
 let isRefreshing = false;
@@ -75,7 +75,7 @@ export const LoadWithAuthInterceptor = () => {
                 try {
                     const { data } = await api.post<RefreshTokenResponse>(REFRESH_TOKEN_ENDPOINT);
 
-                    const newAccessToken = data.accessToken;
+                    const newAccessToken = data.access_token;
                     if (newAccessToken) {
                         localStorage.setItem(accessTokenKey, newAccessToken);
                     }
@@ -85,7 +85,7 @@ export const LoadWithAuthInterceptor = () => {
 
                     processQueue(null, newAccessToken);
 
-                    return apiWithAuth(originalRequest);
+                    return api(originalRequest);
                 } catch (refreshError) {
                     localStorage.removeItem(accessTokenKey);
                     processQueue(refreshError as AxiosError);

@@ -7,7 +7,7 @@ const LoginPage = () => {
 
     return (
         <>
-            <PageTitle title={"Авторизация"}/>
+            <PageTitle title="Авторизация"/>
             <div className={cl.LoginPage}>
                 <div className={cl.LoginPage__container}>
                     <LoginForm/>

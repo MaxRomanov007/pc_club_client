@@ -1,0 +1,12 @@
+.RegistrationPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: var(--spacing);
+  }
+}
