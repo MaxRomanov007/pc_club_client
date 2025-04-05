@@ -14,9 +14,16 @@ const Burger = () => {
 
     return (
         <>
-            <button className={classNames(cl.burger__button, isVisible && cl.burger__button_open)} onClick={clickHandler}/>
+            <button
+                className={classNames(cl.burger__button, isVisible && cl.burger__button_open)}
+                onClick={clickHandler}
+            />
+            <div
+                className={classNames(cl.burger__overlay, isVisible && cl.burger__overlay_visible)}
+                onClick={() => setIsVisible(false)}
+            />
             <aside className={classNames(cl.burger__menu, isVisible && cl.burger__menu_visible)}>
-                <NavBar className={cl.burger__menu__links}/>
+                <NavBar onLinkClick={() => setIsVisible(false)} className={cl.burger__menu__links}/>
             </aside>
         </>
     );

@@ -6,19 +6,20 @@ import {IsAuthorizedContext} from "@/context/isAuthorized.ts";
 
 interface NavBarProps {
     className?: string;
+    onLinkClick?: () => void;
 }
 
-const NavBar: FC<NavBarProps> = ({className}) => {
+const NavBar: FC<NavBarProps> = ({className, onLinkClick}) => {
     const [isAuth] = useContext(IsAuthorizedContext)
 
     return (
         <nav className={classNames(cl.nav, className)}>
-            <NavigationLink to='/restraunt'>Ресторан</NavigationLink>
-            <NavigationLink to='/pc'>ПК</NavigationLink>
+            <NavigationLink onClick={onLinkClick} to='/restraunt'>Ресторан</NavigationLink>
+            <NavigationLink onClick={onLinkClick} to='/pc'>ПК</NavigationLink>
             {isAuth ?
-                <NavigationLink to='/profile'>Аккаунт</NavigationLink>
+                <NavigationLink onClick={onLinkClick} to='/profile'>Аккаунт</NavigationLink>
                 :
-                <NavigationLink to='/login'>Войти</NavigationLink>
+                <NavigationLink onClick={onLinkClick} to='/login'>Войти</NavigationLink>
             }
         </nav>
     );
