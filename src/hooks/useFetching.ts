@@ -41,3 +41,28 @@ export const useFetching: useFetchingFunc = (callback) => {
 
     return [fetching, isLoading, status];
 }
+
+export const useFetchingWithoutRedirect: useFetchingFunc = (callback) => {
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [status, setStatus] = useState<number>(200)
+
+    const fetching: fetchingFunction = async (...args) => {
+        try {
+            setIsLoading(true)
+            await callback(...args)
+        } catch (e: any) {
+            if (!AxiosStatic.isAxiosError(e) || !e.response) {
+                setStatus(0)
+                return 0
+            }
+
+            setStatus(e.response.status)
+            return e.response.status
+        } finally {
+            setIsLoading(false)
+        }
+        return 200
+    }
+
+    return [fetching, isLoading, status];
+}

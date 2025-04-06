@@ -10,7 +10,7 @@ import Input from "components/ui/Input.tsx";
 import Button from "components/ui/Button.tsx";
 import cl from "styles/pages/RegistrationPage.module.scss"
 import {useContext, useEffect} from "react";
-import {IsAuthorizedContext} from "@/context/isAuthorized.ts";
+import {UserContext} from "@/context/UserContext.ts";
 
 type Credentials = {
     email: string
@@ -30,7 +30,7 @@ const RegistrationForm = () => {
         mode: "onBlur"
     });
     const navigate = useNavigate()
-    const [, setIsAuth] = useContext(IsAuthorizedContext)
+    const [,,fetchUser] = useContext(UserContext)
 
     const onRegistrationSubmit: SubmitHandler<Credentials> = async (cred, e) => {
         e?.preventDefault()
@@ -39,7 +39,7 @@ const RegistrationForm = () => {
         switch (status) {
             case 200:
                 showNotification("Вы успешно зарегистрировались")
-                setIsAuth(true)
+                fetchUser()
                 navigate("/profile")
                 break
             default:

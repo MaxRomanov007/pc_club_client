@@ -1,6 +1,6 @@
 import PageTitle from "components/ui/PageTitle.tsx";
 import {useParams} from "react-router-dom";
-import {MouseEventHandler, useEffect, useMemo, useState} from "react";
+import {MouseEventHandler, useContext, useEffect, useMemo, useState} from "react";
 import {useFetching} from "@/hooks/useFetching.ts";
 import {useNotification} from "@/hooks/useNotification.ts";
 import Loader from "components/ui/Loader.tsx";
@@ -9,6 +9,7 @@ import DishService from "@/api/services/DishService.ts";
 import cl from "styles/pages/DishDetailsPage.module.scss";
 import ImagesCarousel from "components/ui/ImagesCarousel.tsx";
 import Button from "components/ui/Button.tsx";
+import {UserContext} from "@/context/UserContext.ts";
 
 type DishDetailsPageParams = {
     id: string
@@ -32,6 +33,7 @@ const DishDetailsPage = () => {
             await DishService.orderDish(id)
         }
     )
+    const [,,fetchUser] = useContext(UserContext)
 
     useEffect(() => {
         fetchDish(params.id)
@@ -60,6 +62,7 @@ const DishDetailsPage = () => {
         switch (code) {
             case 200:
                 showNotification("Покупка прошла успешно")
+                fetchUser()
                 return
             case 402:
                 showNotification("Недостаточно средств")

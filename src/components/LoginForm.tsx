@@ -10,7 +10,7 @@ import {loginSchema} from "@/validations/login.ts";
 import {Tooltip} from "antd";
 import {useNavigate} from "react-router-dom";
 import {useContext} from "react";
-import {IsAuthorizedContext} from "@/context/isAuthorized.ts";
+import {UserContext} from "@/context/UserContext.ts";
 
 type Credentials = {
     email: string
@@ -29,7 +29,7 @@ const LoginForm = () => {
         mode: "onBlur"
     });
     const navigate = useNavigate()
-    const [, setIsAuth] = useContext(IsAuthorizedContext)
+    const [,,fetchUser] = useContext(UserContext)
 
     const onLoginSubmit: SubmitHandler<Credentials> = async (cred, e) => {
         e?.preventDefault()
@@ -38,7 +38,7 @@ const LoginForm = () => {
         switch (status) {
             case 200:
                 showNotification("Вы успешно авторизовались")
-                setIsAuth(true)
+                fetchUser()
                 navigate("/profile")
                 break
             case 401:

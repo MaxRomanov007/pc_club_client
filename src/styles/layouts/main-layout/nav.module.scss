@@ -32,5 +32,9 @@
     &_selected {
       color: var(--color-foreground);
     }
+
+    &_loading {
+      opacity: 0.5;
+    }
   }
 }
