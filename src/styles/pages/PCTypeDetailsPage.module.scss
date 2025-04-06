@@ -52,3 +52,10 @@
     }
   }
 }
+
+.Components {
+  &__title {
+    text-align: center;
+    margin-block: var(--spacing);
+  }
+}

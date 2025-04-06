@@ -5,6 +5,6 @@ export interface IVideoCard {
     id: number;
     videoCardProducerId: number;
     model: string;
-    videoCardProducer: IVideoCardProducer;
+    video_card_producer: IVideoCardProducer;
     pcTypes: IPcType[];
 }

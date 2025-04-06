@@ -1,0 +1,23 @@
+@use "styles/mixins" as *;
+
+.ComponentsTable {
+  text-align: center;
+  width: 100%;
+  border-collapse: collapse;
+  @include fluid-text(20, 18);
+
+  &__container {
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-accent) transparent;
+  }
+
+  & th, & td {
+    padding: var(--spacing);
+  }
+
+  & th, & td {
+    border: var(--border);
+  }
+}

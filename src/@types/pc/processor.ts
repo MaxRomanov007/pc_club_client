@@ -5,6 +5,6 @@ export interface IProcessor {
     id: number;
     processorProducerId: number;
     model: string;
-    processorProducer: IProcessorProducer;
+    processor_producer: IProcessorProducer;
     pcTypes: IPcType[];
 }

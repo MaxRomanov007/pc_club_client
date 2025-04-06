@@ -9,6 +9,7 @@ import ImagesCarousel from "components/ui/ImagesCarousel.tsx";
 import cl from "styles/pages/PCTypeDetailsPage.module.scss"
 import PageTitle from "components/ui/PageTitle.tsx";
 import OrderPcButton from "components/PCTypeDetailsPage/OrderPcButton.tsx";
+import ComponentsTable from "components/ComponentsTable.tsx";
 
 type PcTypeDetailsPageParams = {
     id: string
@@ -16,7 +17,7 @@ type PcTypeDetailsPageParams = {
 
 const PcTypeDetailsPage = () => {
     const params = useParams<PcTypeDetailsPageParams>();
-    const [pcType, setPcType] = useState<IPcType | null>(null)
+    const [pcType, setPcType] = useState<IPcType | undefined>(undefined)
     const [fetchPCType, isPcTypeLoading, pcTypeResponseStatus] = useFetching(
         async (id: number) => {
             const pcType = await PcService.getPCType(id)
@@ -61,8 +62,12 @@ const PcTypeDetailsPage = () => {
                 <div>
                     <p>{pcType?.description}</p>
                     <h3>{pcType?.hour_cost} руб./час</h3>
-                    <OrderPcButton id={Number(params.id) ?? 0}/>
+                    <OrderPcButton id={Number(params.id)}/>
                 </div>
+            </section>
+            <section>
+                <h2 className={cl.Components__title}>Характеристики</h2>
+                <ComponentsTable pcType={pcType}/>
             </section>
         </div>
     );

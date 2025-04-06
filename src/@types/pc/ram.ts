@@ -5,6 +5,6 @@ export interface IRAM {
     id: number;
     ramTypeId: number;
     capacity: number;
-    ramType: IRAMType;
+    ram_type: IRAMType;
     pcTypes: IPcType[];
 }

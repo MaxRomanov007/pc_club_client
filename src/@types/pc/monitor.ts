@@ -5,6 +5,6 @@ export interface IMonitor {
     id: number;
     monitorProducerId: number;
     model: string;
-    monitorProducer: IMonitorProducer;
+    monitor_producer: IMonitorProducer;
     pcTypes: IPcType[];
 }
