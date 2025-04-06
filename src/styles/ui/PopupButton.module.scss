@@ -1,3 +1,5 @@
+@use "styles/media" as *;
+
 .PopupButton {
   position: relative;
 
@@ -46,6 +48,11 @@
 
     animation: scaleAnimation var(--transition-duration) linear;
     transition: opacity var(--transition-duration);
+
+    @include tablet {
+      left: 50%;
+      transform: translate(-50%, calc(100% + 20px))
+    }
 
     &_exit {
       opacity: 0;
