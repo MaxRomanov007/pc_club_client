@@ -32,6 +32,14 @@
     }
   }
 
+  &:disabled {
+    opacity: 0.5;
+    cursor: unset;
+    &::before {
+      content: none;
+    }
+  }
+
   &_outlined {
     background-color: var(--color-foreground);
     color: var(--color-main);

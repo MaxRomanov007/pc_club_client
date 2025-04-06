@@ -2,7 +2,6 @@
 @use "styles/mixins" as *;
 
 .main {
-  @include flex-center;
   min-height: 100vh;
   padding-bottom: var(--section-padding-y);
 
@@ -10,6 +9,7 @@
     margin-top: var(--header-heigth);
     max-width: calc(var(--container-width) + var(--container-padding-x) * 2);
     width: 100%;
+    min-height: calc(100vh - var(--header-heigth));
     margin-inline: auto;
     padding-inline: var(--container-padding-x);
   }

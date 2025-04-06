@@ -54,13 +54,13 @@ const PcTypeDetailsPage = () => {
 
     return (
         <div>
-            <PageTitle title={`ПК ${pcType?.name || ''}`}/>
+            <PageTitle title={`ПК ${pcType?.name ?? ''}`}/>
             <h1 className={cl.Page__title}>{pcType?.name}</h1>
             <section className={cl.Information}>
                 <ImagesCarousel images={images} className={cl.Information__carousel}/>
                 <div>
                     <p>{pcType?.description}</p>
-                    <h3>{pcType?.hour_cost}</h3>
+                    <h3>{pcType?.hour_cost} руб./час</h3>
                     <OrderPcButton id={Number(params.id) ?? 0}/>
                 </div>
             </section>

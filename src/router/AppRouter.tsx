@@ -5,6 +5,7 @@ import PCTypeDetailsPage from "pages/PCTypeDetailsPage.tsx";
 import LoginPage from "pages/LoginPage.tsx";
 import RegistrationPage from "pages/RegistrationPage.tsx";
 import DishesPage from "pages/DishesPage.tsx";
+import DishDetailsPage from "pages/DishDetailsPage.tsx";
 
 const AppRouter = () => {
 
@@ -13,6 +14,7 @@ const AppRouter = () => {
             <Routes>
                 <Route path="/" element={<MainLayout/>}>
                     <Route path='/restraunt' element={<DishesPage/>}/>
+                    <Route path='/restraunt/:id' element={<DishDetailsPage/>}/>
                     <Route path='/pc' element={<PCTypesPage/>}/>
                     <Route path='/pc/:id' element={<PCTypeDetailsPage/>}/>
                     <Route path='/profile'/>

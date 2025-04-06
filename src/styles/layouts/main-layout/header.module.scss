@@ -11,6 +11,7 @@
   z-index: 1;
   display: flex;
   justify-content: start;
+  height: var(--header-heigth);
 
   &_mobile {
     justify-content: end;

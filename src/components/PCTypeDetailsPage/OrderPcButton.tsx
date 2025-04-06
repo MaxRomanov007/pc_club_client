@@ -75,7 +75,7 @@ const OrderPcButton: FC<OrderPcButtonProps> = ({id}) => {
     }
 
     return (
-        <PopupButton text='Hello'>
+        <PopupButton text='Арендовать'>
             <div className={cl.Information__order}>
                 <RoomsList
                     rooms={rooms}

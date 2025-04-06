@@ -1,4 +1,5 @@
 .RegistrationPage {
+  height: calc(100vh - var(--header-heigth));
   display: flex;
   align-items: center;
   justify-content: center;

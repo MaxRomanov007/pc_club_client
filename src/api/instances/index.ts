@@ -8,9 +8,4 @@ export const api = axios.create({
     withCredentials: true,
 })
 
-export const apiWithAuth = axios.create({
-    baseURL: address,
-    withCredentials: true
-})
-
 LoadWithAuthInterceptor();

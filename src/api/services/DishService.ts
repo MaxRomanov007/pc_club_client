@@ -11,4 +11,13 @@ export default class DishService {
         })
         return response.data
     }
+
+    static async getDish(id: number): Promise<IDish> {
+        const response = await api.get<IDish>('dishes/' + id)
+        return response.data
+    }
+
+    static async orderDish(dish_id: number): Promise<void> {
+        await api.post('order-dish', {dish_id})
+    }
 }

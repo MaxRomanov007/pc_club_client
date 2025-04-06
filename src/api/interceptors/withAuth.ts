@@ -1,5 +1,5 @@
 import {AxiosError, AxiosResponse, InternalAxiosRequestConfig} from "axios";
-import {api, apiWithAuth} from "@/api/instances";
+import {api} from "@/api/instances";
 import {accessTokenKey} from "@/constants";
 
 const REFRESH_TOKEN_ENDPOINT = '/refresh';
@@ -32,7 +32,7 @@ const processQueue = (error: AxiosError | null, token: string | null = null): vo
 };
 
 export const LoadWithAuthInterceptor = () => {
-    apiWithAuth.interceptors.request.use((config: ExtendedAxiosRequestConfig) => {
+    api.interceptors.request.use((config: ExtendedAxiosRequestConfig) => {
         const accessToken = localStorage.getItem(accessTokenKey);
         if (accessToken) {
             config.headers = config.headers || {};
@@ -41,7 +41,7 @@ export const LoadWithAuthInterceptor = () => {
         return config;
     });
 
-    apiWithAuth.interceptors.response.use(
+    api.interceptors.response.use(
         (response: AxiosResponse) => response,
         async (error: AxiosError) => {
             const originalRequest = error.config as ExtendedAxiosRequestConfig;
@@ -62,7 +62,7 @@ export const LoadWithAuthInterceptor = () => {
                         .then(token => {
                             originalRequest.headers = originalRequest.headers || {};
                             originalRequest.headers.Authorization = `Bearer ${token}`;
-                            return apiWithAuth(originalRequest);
+                            return api(originalRequest);
                         })
                         .catch(err => {
                             return Promise.reject(err);
