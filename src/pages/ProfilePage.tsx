@@ -1,39 +1,66 @@
 import cl from "styles/pages/ProfilePage.module.scss"
 import PageTitle from "components/ui/PageTitle.tsx";
 import Button from "components/ui/Button.tsx";
-import {FC, useContext, useEffect, useState} from "react";
-import {useFetching} from "@/hooks/useFetching.ts";
-import {IDishOrder, IPcOrder} from "types/pc/order.ts";
-import UserService from "@/api/services/UserService.ts";
+import {FC, MouseEventHandler, useContext} from "react";
 import OrdersList from "components/ProfilePage/OrdersList.tsx";
 import {UserContext} from "@/context/UserContext.ts";
+import {useFetching} from "@/hooks/useFetching.ts";
+import UserService from "@/api/services/UserService.ts";
+import {useNotification} from "@/hooks/useNotification.ts";
+import {useNavigate} from "react-router-dom";
+import {accessTokenKey} from "@/constants";
 
 const ProfilePage: FC = () => {
-    const [pcOrders, setPcOrders] = useState<IPcOrder[]>([])
-    const [dishOrders, setDishOrders] = useState<IDishOrder[]>([])
-    const [fetchUserOrders, isUserOrdersLoading] = useFetching(
-        async () => {
-            const [pcOrd, dishOrd] = await UserService.getUserOrders()
-            setPcOrders(pcOrd)
-            setDishOrders(dishOrd)
-        }
+    const [user, , fetchUser] = useContext(UserContext)
+    const [logout, isLogoutProcessing] = useFetching(
+        async () => await UserService.logout()
     )
-    const [user] = useContext(UserContext)
+    const [addMoney, isMoneyAddProcessing] = useFetching(
+        async () => await UserService.addUserMoney(1000)
+    )
+    const showNotification = useNotification()
+    const navigate = useNavigate()
 
-    useEffect(() => {
-        fetchUserOrders()
-    }, []);
+    const onLogoutButtonClick: MouseEventHandler<HTMLButtonElement> = async () => {
+        await logout()
+        showNotification("Вы успешно вышли из аккаунта")
+        navigate("/login")
+        localStorage.removeItem(accessTokenKey)
+        fetchUser()
+    }
+
+    const onAddMoneyButtonClick: MouseEventHandler<HTMLButtonElement> = async () => {
+        const status = await addMoney()
+        if (status === 200) {
+            showNotification("Баланс пополнен")
+            fetchUser()
+            return
+        }
+        showNotification("Произошла ошибка")
+    }
 
     return (
         <>
             <PageTitle title={`Профиль ${user?.email}`}/>
             <div className={cl.ProfilePage}>
                 <div className={cl.ProfilePage__container}>
-                    <h1 className={cl.ProfilePage__title}>Профиль</h1>
+                    <h1 className={cl.ProfilePage__title}>
+                        Профиль
+                    </h1>
                     <div>Почта: {user?.email}</div>
-                    <Button>Пополнить баланс</Button>
-                    <Button>Выход</Button>
-                    <OrdersList pcOrders={pcOrders} dishOrders={dishOrders} loading={isUserOrdersLoading}/>
+                    <Button
+                        onClick={onAddMoneyButtonClick}
+                        disabled={isMoneyAddProcessing}
+                    >
+                        Пополнить баланс
+                    </Button>
+                    <Button
+                        onClick={onLogoutButtonClick}
+                        disabled={isLogoutProcessing}
+                    >
+                        Выход
+                    </Button>
+                    <OrdersList/>
                 </div>
             </div>
         </>

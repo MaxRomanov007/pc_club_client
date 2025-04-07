@@ -24,7 +24,7 @@ export const useFetching: useFetchingFunc = (callback) => {
             if (e.isAuthError) {
                 showNotification("Необходимо авторизоваться")
                 navigate('/login')
-                return 0
+                return 401
             }
             if (!AxiosStatic.isAxiosError(e) || !e.response) {
                 setStatus(0)

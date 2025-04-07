@@ -39,4 +39,12 @@ export default class UserService {
         console.log(response)
         return [response.data.pc_orders, response.data.dish_orders]
     }
+
+    static async logout(): Promise<void> {
+        await api.post('logout')
+    }
+
+    static async addUserMoney(count: number): Promise<void> {
+        await api.post('add-money', {count})
+    }
 }

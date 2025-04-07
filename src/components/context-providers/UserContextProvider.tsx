@@ -3,11 +3,16 @@ import {UserContext} from "@/context/UserContext.ts";
 import {IUser} from "types/pc/user.ts";
 import {useFetchingWithoutRedirect} from "@/hooks/useFetching.ts";
 import UserService from "@/api/services/UserService.ts";
+import {accessTokenKey} from "@/constants";
 
 const UserContextProvider: FC<PropsWithChildren> = ({children}) => {
     const [user, setUser] = useState<IUser | null>(null)
     const [fetchUser, isUserLoading] = useFetchingWithoutRedirect(
         async () => {
+            if (!localStorage.getItem(accessTokenKey)) {
+                setUser(null)
+                return
+            }
             setUser(await UserService.getUser())
         }
     )

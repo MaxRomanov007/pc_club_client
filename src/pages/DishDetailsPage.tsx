@@ -67,6 +67,8 @@ const DishDetailsPage = () => {
             case 402:
                 showNotification("Недостаточно средств")
                 return
+            case 401:
+                return
             default:
                 showNotification("Произошла ошибка")
         }

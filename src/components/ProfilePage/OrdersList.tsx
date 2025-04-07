@@ -1,17 +1,27 @@
-import {FC, useMemo} from "react";
-import {IPcOrder, IDishOrder, IOrder, isPcOrder, isDishOrder} from "types/pc/order.ts";
+import {FC, useEffect, useMemo, useState} from "react";
+import {IDishOrder, IOrder, IPcOrder, isDishOrder, isPcOrder} from "types/pc/order.ts";
 import Loader from "components/ui/Loader.tsx";
 import PcOrderItem from "components/ProfilePage/PcOrderItem.tsx";
 import DishOrderItem from "components/ProfilePage/DishOrderItem.tsx";
 import cl from "styles/components/ProfilePage/OrderList.module.scss"
+import {useFetching} from "@/hooks/useFetching.ts";
+import UserService from "@/api/services/UserService.ts";
 
-interface OrdersListProps {
-    pcOrders: IPcOrder[]
-    dishOrders: IDishOrder[]
-    loading?: boolean
-}
+const OrdersList: FC = () => {
+    const [pcOrders, setPcOrders] = useState<IPcOrder[]>([])
+    const [dishOrders, setDishOrders] = useState<IDishOrder[]>([])
+    const [fetchUserOrders, isUserOrdersLoading] = useFetching(
+        async () => {
+            const [pcOrd, dishOrd] = await UserService.getUserOrders()
+            setPcOrders(pcOrd)
+            setDishOrders(dishOrd)
+        }
+    )
 
-const OrdersList: FC<OrdersListProps> = ({pcOrders, dishOrders, loading}) => {
+    useEffect(() => {
+        fetchUserOrders()
+    }, []);
+
     const orders = useMemo(
         () =>
             ([...pcOrders, ...dishOrders] as IOrder[]).sort(
@@ -22,7 +32,7 @@ const OrdersList: FC<OrdersListProps> = ({pcOrders, dishOrders, loading}) => {
     )
 
 
-    if (loading) {
+    if (isUserOrdersLoading) {
         return <Loader/>
     }
 
