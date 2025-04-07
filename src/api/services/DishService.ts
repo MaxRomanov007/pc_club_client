@@ -17,7 +17,7 @@ export default class DishService {
         return response.data
     }
 
-    static async orderDish(dish_id: number): Promise<void> {
-        await api.post('order-dish', {dish_id})
+    static async orderDish(dish_id: number, count: number = 1): Promise<void> {
+        await api.post('order-dish', {dish_id, count})
     }
 }

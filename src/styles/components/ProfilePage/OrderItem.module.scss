@@ -1,0 +1,33 @@
+.OrderItem {
+  list-style-type: none;
+
+  border: var(--border);
+  border-radius: var(--border-radius);
+  padding: var(--spacing);
+
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--spacing);
+
+  &__title {
+    text-align: center;
+
+  }
+
+  & table {
+    width: 100%;
+    position: relative;
+  }
+  
+  & caption {
+    caption-side: bottom;
+    padding-top: var(--spacing);
+    text-align: right;
+  }
+
+  & th {
+    font-weight: normal;
+    text-align: left;
+    padding-right: var(--spacing);
+  }
+}

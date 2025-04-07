@@ -6,6 +6,7 @@ import LoginPage from "pages/LoginPage.tsx";
 import RegistrationPage from "pages/RegistrationPage.tsx";
 import DishesPage from "pages/DishesPage.tsx";
 import DishDetailsPage from "pages/DishDetailsPage.tsx";
+import ProfilePage from "pages/ProfilePage.tsx";
 
 const AppRouter = () => {
 
@@ -17,7 +18,7 @@ const AppRouter = () => {
                     <Route path='/restraunt/:id' element={<DishDetailsPage/>}/>
                     <Route path='/pc' element={<PCTypesPage/>}/>
                     <Route path='/pc/:id' element={<PCTypeDetailsPage/>}/>
-                    <Route path='/profile'/>
+                    <Route path='/profile' element={<ProfilePage/>}/>
                     <Route path='/login' element={<LoginPage/>}/>
                     <Route path='/registration' element={<RegistrationPage/>}/>
                 </Route>

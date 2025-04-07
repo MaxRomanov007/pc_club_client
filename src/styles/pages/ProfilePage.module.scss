@@ -1,0 +1,17 @@
+.ProfilePage {
+  min-height: calc(100vh - var(--header-heigth));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--spacing);
+  }
+
+  &__title {
+    text-align: center;
+    margin-block: var(--spacing);
+  }
+}

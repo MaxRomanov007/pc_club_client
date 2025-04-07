@@ -1,5 +1,5 @@
 import {IPcRoom} from "types/pc/pc-room.ts";
-import {IPcOrder} from "types/pc/pc-order.ts";
+import {IPcOrder} from "types/pc/order.ts";
 import {IPcStatus} from "types/pc/pc-status.ts";
 import {IPcType} from "types/pc/pc-type.ts";
 
