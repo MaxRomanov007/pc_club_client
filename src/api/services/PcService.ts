@@ -1,6 +1,6 @@
 import {IPcType} from "types/pc/pc-type.ts";
-import {IPcRoom} from "types/pc/pc-room.ts";
 import {api} from "@/api/instances";
+import {IPc} from "types/pc/pc.ts";
 
 export default class PcService {
     static async getPCTypes(limit: number, offset: number): Promise<IPcType[]> {
@@ -18,11 +18,9 @@ export default class PcService {
         return response.data
     }
 
-    static async getPCRooms(pcTypeID: number): Promise<IPcRoom[]> {
-        const response = await api.get<IPcRoom[]>('pc-rooms', {
-            params: {
-                type_id: pcTypeID,
-            }
+    static async getPcs(type_id: number): Promise<IPc[]> {
+        const response = await api.get('pcs', {
+            params: {type_id}
         })
         return response.data
     }

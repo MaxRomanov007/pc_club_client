@@ -1,4 +1,4 @@
-import PageTitle from "components/ui/PageTitle.tsx";
+import PageTitle from "components/utils/PageTitle.ts";
 import cl from "styles/pages/RegistrationPage.module.scss";
 import RegistrationForm from "components/RegistrationForm.tsx";
 

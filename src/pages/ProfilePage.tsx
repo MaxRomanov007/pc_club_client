@@ -1,5 +1,5 @@
 import cl from "styles/pages/ProfilePage.module.scss"
-import PageTitle from "components/ui/PageTitle.tsx";
+import PageTitle from "components/utils/PageTitle.ts";
 import Button from "components/ui/Button.tsx";
 import {FC, MouseEventHandler, useContext} from "react";
 import OrdersList from "components/ProfilePage/OrdersList.tsx";

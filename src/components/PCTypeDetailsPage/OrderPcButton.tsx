@@ -1,4 +1,4 @@
-import {FC, MouseEventHandler, useEffect, useState} from 'react';
+import {FC, MouseEventHandler, useContext, useEffect, useState} from 'react';
 import cl from "styles/pages/PCTypeDetailsPage.module.scss";
 import RoomsList from "components/PCTypeDetailsPage/RoomsList.tsx";
 import NumberInput from "components/ui/NumberInput.tsx";
@@ -9,28 +9,43 @@ import {IPcRoom} from "types/pc/pc-room.ts";
 import {useFetching} from "@/hooks/useFetching.ts";
 import PcService from "@/api/services/PcService.ts";
 import {useNotification} from "@/hooks/useNotification.ts";
+import {UserContext} from "@/context/UserContext.ts";
 
 interface OrderPcButtonProps {
     id: number
+    hourCost?: number
 }
 
-const OrderPcButton: FC<OrderPcButtonProps> = ({id}) => {
+const OrderPcButton: FC<OrderPcButtonProps> = ({id, hourCost = 0}) => {
     const [rooms, setRooms] = useState<IPcRoom[]>([]);
     const [selectedPcId, setSelectedPcId] = useState<number>(0);
     const [hourCount, setHourCount] = useState<number>(1)
     const showNotification = useNotification()
     const [fetchPcRooms, , roomResponseStatus] = useFetching(
         async (id: number) => {
-            const rooms = await PcService.getPCRooms(id)
-            setRooms(rooms)
+            const pcs = await PcService.getPcs(id)
+            const roomsMap = new Map<number, IPcRoom>();
+
+            pcs.forEach(pc => {
+                if (!roomsMap.has(pc.pc_room_id)) {
+                    roomsMap.set(pc.pc_room_id, {
+                        ...pc.pc_room,
+                        pcs: []
+                    });
+                }
+                const room = roomsMap.get(pc.pc_room_id)!;
+                room.pcs.push(pc);
+            });
+
+            setRooms(Array.from(roomsMap.values()))
         }
     )
     const [orderPc, , orderPcStatus] = useFetching(
         async (pcId: number, hoursCount: number) => {
-            const code = await PcService.orderPc(pcId, hoursCount)
-            showNotification(code)
+            await PcService.orderPc(pcId, hoursCount)
         }
     )
+    const [,,fetchUser] = useContext(UserContext)
 
     useEffect(() => {
         fetchPcRooms(id)
@@ -66,12 +81,25 @@ const OrderPcButton: FC<OrderPcButtonProps> = ({id}) => {
         setSelectedPcId(id)
     }
 
-    const onOrderButtonClick: MouseEventHandler<HTMLButtonElement> = () => {
+    const onOrderButtonClick: MouseEventHandler<HTMLButtonElement> = async () => {
         if (selectedPcId === 0) {
             showNotification("Необходимо выбрать ПК")
             return
         }
-        orderPc(selectedPcId, hourCount)
+        const status = await orderPc(selectedPcId, hourCount)
+        switch (status) {
+            case 200:
+                showNotification("ПК успешно арендован")
+                fetchUser()
+                return
+            case 401:
+                return
+            case 402:
+                showNotification("Недостаточно средств")
+                return
+            default:
+                showNotification("Произошла ошибка")
+        }
     }
 
     return (
@@ -90,6 +118,8 @@ const OrderPcButton: FC<OrderPcButtonProps> = ({id}) => {
                         value={hourCount}
                         onValueChange={count => setHourCount(count)}
                     />
+
+                    <span>Итог: {hourCount * hourCost} руб.</span>
 
                     <Button
                         variant={ButtonVariants.Outlined}

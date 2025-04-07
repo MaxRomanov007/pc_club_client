@@ -1,6 +1,6 @@
 import cl from "styles/pages/LoginPage.module.scss"
 import {Link} from "react-router-dom";
-import PageTitle from "components/ui/PageTitle.tsx";
+import PageTitle from "components/utils/PageTitle.ts";
 import LoginForm from "components/LoginForm.tsx";
 
 const LoginPage = () => {

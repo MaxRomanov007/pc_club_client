@@ -1,4 +1,4 @@
-import PageTitle from "components/ui/PageTitle.tsx";
+import PageTitle from "components/utils/PageTitle.ts";
 import cl from "styles/pages/DishesPage.module.scss";
 import List from "components/ui/List.tsx";
 import {useEffect, useState} from "react";

@@ -2,7 +2,7 @@ import cl from "styles/pages/LoginPage.module.scss";
 import Input from "components/ui/Input.tsx";
 import Button from "components/ui/Button.tsx";
 import {useNotification} from "@/hooks/useNotification.ts";
-import {useFetching} from "@/hooks/useFetching.ts";
+import {useFetchingWithoutRedirect} from "@/hooks/useFetching.ts";
 import UserService from "@/api/services/UserService.ts";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
@@ -19,7 +19,7 @@ type Credentials = {
 
 const LoginForm = () => {
     const showNotification = useNotification();
-    const [login] = useFetching(
+    const [login] = useFetchingWithoutRedirect(
         async (email: string, password: string) => {
             await UserService.login(email, password)
         }

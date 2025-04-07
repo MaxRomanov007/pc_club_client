@@ -7,11 +7,13 @@ import RegistrationPage from "pages/RegistrationPage.tsx";
 import DishesPage from "pages/DishesPage.tsx";
 import DishDetailsPage from "pages/DishDetailsPage.tsx";
 import ProfilePage from "pages/ProfilePage.tsx";
+import ScrollToTop from "components/utils/ScrollToTop.ts";
 
 const AppRouter = () => {
 
     return (
         <BrowserRouter>
+            <ScrollToTop/>
             <Routes>
                 <Route path="/" element={<MainLayout/>}>
                     <Route path='/restraunt' element={<DishesPage/>}/>

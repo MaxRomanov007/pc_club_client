@@ -6,7 +6,7 @@ import List from "components/ui/List.tsx";
 import PcTypeItem from "components/PcTypeItem.tsx";
 import cl from "styles/pages/PCsPage.module.scss"
 import {useNotification} from "@/hooks/useNotification.ts";
-import PageTitle from "components/ui/PageTitle.tsx";
+import PageTitle from "components/utils/PageTitle.ts";
 
 const PCTypesPage: FC = () => {
     const [pcTypes, setPCTypes] = useState<IPcType[]>([]);

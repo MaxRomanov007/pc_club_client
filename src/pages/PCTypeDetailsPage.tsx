@@ -7,7 +7,7 @@ import {useNotification} from "@/hooks/useNotification.ts";
 import Loader from "components/ui/Loader.tsx";
 import ImagesCarousel from "components/ui/ImagesCarousel.tsx";
 import cl from "styles/pages/PCTypeDetailsPage.module.scss"
-import PageTitle from "components/ui/PageTitle.tsx";
+import PageTitle from "components/utils/PageTitle.ts";
 import OrderPcButton from "components/PCTypeDetailsPage/OrderPcButton.tsx";
 import ComponentsTable from "components/ComponentsTable.tsx";
 
@@ -62,7 +62,7 @@ const PcTypeDetailsPage = () => {
                 <div>
                     <p>{pcType?.description}</p>
                     <h3>{pcType?.hour_cost} руб./час</h3>
-                    <OrderPcButton id={Number(params.id)}/>
+                    <OrderPcButton id={Number(params.id)} hourCost={pcType?.hour_cost}/>
                 </div>
             </section>
             <section>

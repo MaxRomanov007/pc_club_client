@@ -1,4 +1,4 @@
-import PageTitle from "components/ui/PageTitle.tsx";
+import PageTitle from "components/utils/PageTitle.ts";
 import {useParams} from "react-router-dom";
 import {MouseEventHandler, useContext, useEffect, useMemo, useState} from "react";
 import {useFetching} from "@/hooks/useFetching.ts";

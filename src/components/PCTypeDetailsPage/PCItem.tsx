@@ -2,6 +2,7 @@ import {FC, MouseEventHandler} from 'react';
 import {IPc} from "types/pc/pc.ts";
 import cl from "styles/components/RoomsList.module.scss";
 import classNames from "classnames";
+import {Tooltip} from "antd";
 
 interface PcItemProps {
     pc?: IPc
@@ -26,10 +27,12 @@ const PcItem: FC<PcItemProps> = (
     }
 
     return (
-        <div
-            onClick={clickHandler}
-            className={classNames(cl.PcItem, !isSelected && cl.PcItem_available, isSelected && cl.PcItem_checked)}
-        />
+        <Tooltip title={pc.description}>
+            <div
+                onClick={clickHandler}
+                className={classNames(cl.PcItem, !isSelected && cl.PcItem_available, isSelected && cl.PcItem_checked)}
+            />
+        </Tooltip>
     );
 };
 
